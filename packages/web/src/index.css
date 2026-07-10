@@ -5,6 +5,10 @@
     -apple-system,
     "Segoe UI",
     sans-serif;
+  --color-borde: #8888;
+  --color-ejecucion: #ffe08066;
+  --color-error: #ff6b6b4d;
+  --color-error-texto: #d13438;
 }
 
 body {
@@ -12,7 +16,7 @@ body {
 }
 
 .app {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1.5rem;
 }
@@ -22,10 +26,123 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 .app__editor {
-  border: 1px solid #8888;
+  border: 1px solid var(--color-borde);
   border-radius: 4px;
   overflow: hidden;
+}
+
+.app__columnas {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  align-items: start;
+}
+
+.app__columna {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (max-width: 800px) {
+  .app__columnas {
+    grid-template-columns: 1fr;
+  }
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.controles__contador {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}
+
+.panel-errores {
+  background: var(--color-error);
+  color: var(--color-error-texto);
+  border: 1px solid var(--color-error-texto);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+
+.panel-entradas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.panel-entradas textarea {
+  font-family: monospace;
+  resize: vertical;
+}
+
+.panel-salida {
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  min-height: 4rem;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.grid-variables {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.grid-variables th,
+.grid-variables td {
+  border: 1px solid var(--color-borde);
+  padding: 0.25rem 0.5rem;
+  text-align: left;
+}
+
+.grid-variables__vacio {
+  opacity: 0.6;
+  text-align: center;
+}
+
+.panel-transpilado__selector {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.panel-transpilado__selector button.activo {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.panel-transpilado__codigo {
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+  padding: 0.75rem;
+  overflow-x: auto;
+  max-height: 40vh;
+}
+
+/* Resaltado de línea en el editor (ver src/simplecod/resaltado.ts) */
+.cm-linea-ejecucion {
+  background-color: var(--color-ejecucion);
+}
+
+.cm-linea-error {
+  background-color: var(--color-error);
 }

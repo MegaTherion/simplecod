@@ -26,6 +26,8 @@ export interface InfoSentenciaEjecutada {
   variables: Record<string, Valor>;
 }
 
+const MAX_SENTENCIAS_POR_DEFECTO = 200_000;
+
 export interface OpcionesInterprete {
   /** Valores de entrada (como texto crudo) que van consumiendo las sentencias `Leer`, en orden. */
   entradas?: string[];
@@ -33,6 +35,8 @@ export interface OpcionesInterprete {
   alEscribir?: (texto: string) => void;
   /** Se invoca tras ejecutar cada sentencia, con el estado actual de variables (para el debugger). */
   alEjecutarSentencia?: (info: InfoSentenciaEjecutada) => void;
+  /** Límite de sentencias ejecutadas antes de abortar con ErrorEjecucion (protege contra bucles infinitos). */
+  maxSentencias?: number;
 }
 
 /** Señal interna (no es un error) para propagar el valor de `Retornar` hasta la llamada a función. */
@@ -47,6 +51,8 @@ export class Interprete {
   private indiceEntrada = 0;
   private salidaAcumulada = "";
   private dentroDeFuncion = false;
+  private contadorSentencias = 0;
+  private readonly maxSentencias: number;
 
   private readonly alEscribir: OpcionesInterprete["alEscribir"];
   private readonly alEjecutarSentencia: OpcionesInterprete["alEjecutarSentencia"];
@@ -55,6 +61,7 @@ export class Interprete {
     this.entradas = opciones.entradas ?? [];
     this.alEscribir = opciones.alEscribir;
     this.alEjecutarSentencia = opciones.alEjecutarSentencia;
+    this.maxSentencias = opciones.maxSentencias ?? MAX_SENTENCIAS_POR_DEFECTO;
   }
 
   get salida(): string {
@@ -67,6 +74,7 @@ export class Interprete {
     this.indiceEntrada = 0;
     this.salidaAcumulada = "";
     this.dentroDeFuncion = false;
+    this.contadorSentencias = 0;
 
     for (const nodo of programa.cuerpo) {
       if (nodo.tipo === "DeclaracionFuncion") {
@@ -83,6 +91,14 @@ export class Interprete {
   // --- sentencias ---
 
   private ejecutarSentencia(nodo: Nodo): void {
+    this.contadorSentencias++;
+    if (this.contadorSentencias > this.maxSentencias) {
+      const posicion: Posicion = "linea" in nodo ? nodo : { linea: 0, columna: 0 };
+      throw new ErrorEjecucion(
+        `se superó el límite de ${this.maxSentencias} sentencias ejecutadas (¿posible bucle infinito?)`,
+        posicion,
+      );
+    }
     switch (nodo.tipo) {
       case "Dimension":
         this.ejecutarDimension(nodo);

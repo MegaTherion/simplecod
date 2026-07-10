@@ -266,3 +266,19 @@ describe("errores de ejecución", () => {
     );
   });
 });
+
+describe("límite de sentencias (protección contra bucles infinitos)", () => {
+  it("aborta con ErrorEjecucion al superar maxSentencias", () => {
+    const programa = "Inicio\nMientras Verdadero Hacer\nx = 1\nFinMientras\nFin";
+    const tokens = new Lexer(programa).tokenizar();
+    const ast = new Parser(tokens).parsear();
+    const interprete = new Interprete({ maxSentencias: 100 });
+    try {
+      interprete.ejecutar(ast);
+      expect.unreachable();
+    } catch (error) {
+      expect(error).toBeInstanceOf(ErrorEjecucion);
+      expect((error as ErrorEjecucion).message).toContain("límite de 100 sentencias");
+    }
+  });
+});
