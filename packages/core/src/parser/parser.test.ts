@@ -55,7 +55,7 @@ describe("ejemplos de docs/gramatica.md §5", () => {
                 Escribir "#"
             FinSi
         FinPara
-        Escribir ""
+        Escribir finl
     FinPara
 Fin`;
 
@@ -88,7 +88,7 @@ Fin`;
                 },
               ],
             },
-            { tipo: "Escritura", expresiones: [str("")] },
+            { tipo: "Escritura", expresiones: [str("\n")] },
           ],
         },
       ],
@@ -113,9 +113,9 @@ Fin`;
 
     Leer n
     Si esPrimo(n) Entonces
-        Escribir n, " es primo"
+        Escribir n, " es primo", finl
     Sino
-        Escribir n, " no es primo"
+        Escribir n, " no es primo", finl
     FinSi
 Fin`;
 
@@ -154,8 +154,10 @@ Fin`;
         {
           tipo: "Condicional",
           condicion: llamada("esPrimo", [id("n")]),
-          bloqueSi: [{ tipo: "Escritura", expresiones: [id("n"), str(" es primo")] }],
-          bloqueSino: [{ tipo: "Escritura", expresiones: [id("n"), str(" no es primo")] }],
+          bloqueSi: [{ tipo: "Escritura", expresiones: [id("n"), str(" es primo"), str("\n")] }],
+          bloqueSino: [
+            { tipo: "Escritura", expresiones: [id("n"), str(" no es primo"), str("\n")] },
+          ],
         },
       ],
     };
@@ -172,7 +174,7 @@ Fin`;
         suma = suma + notas[i]
     FinPara
     promedio = suma / 5
-    Escribir "Promedio: ", promedio
+    Escribir "Promedio: ", promedio, finl
 Fin`;
 
     const esperado = {
@@ -199,7 +201,7 @@ Fin`;
           objetivo: id("promedio"),
           valor: binaria("/", id("suma"), num(5)),
         },
-        { tipo: "Escritura", expresiones: [str("Promedio: "), id("promedio")] },
+        { tipo: "Escritura", expresiones: [str("Promedio: "), id("promedio"), str("\n")] },
       ],
     };
 
@@ -210,7 +212,7 @@ Fin`;
     const programa = `Inicio
     dias = ["Lun", "Mar", "Mie", "Jue", "Vie"]
     Para i = 0 Hasta 4 Hacer
-        Escribir dias[i]
+        Escribir dias[i], finl
     FinPara
 Fin`;
 
@@ -227,7 +229,7 @@ Fin`;
           variable: "i",
           desde: num(0),
           hasta: num(4),
-          cuerpo: [{ tipo: "Escritura", expresiones: [acceso("dias", [id("i")])] }],
+          cuerpo: [{ tipo: "Escritura", expresiones: [acceso("dias", [id("i")]), str("\n")] }],
         },
       ],
     };

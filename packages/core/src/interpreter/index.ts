@@ -1,3 +1,2 @@
-// Intérprete tree-walking, ver docs/gramatica.md §6-7.
-// Se completa en el Hito 4.
-export {};
+export { Interprete } from "./interprete.js";
+export type { Valor, OpcionesInterprete, InfoSentenciaEjecutada } from "./interprete.js";

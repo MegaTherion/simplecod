@@ -24,3 +24,10 @@ export class ErrorSintactico extends ErrorSimpleCod {
     this.name = "ErrorSintactico";
   }
 }
+
+export class ErrorEjecucion extends ErrorSimpleCod {
+  constructor(mensaje: string, posicion: Posicion) {
+    super("de ejecución", mensaje, posicion);
+    this.name = "ErrorEjecucion";
+  }
+}

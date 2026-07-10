@@ -448,6 +448,9 @@ export class Parser {
       case "Falso":
         this.avanzar();
         return { tipo: "Literal", valor: false };
+      case "FinL":
+        this.avanzar();
+        return { tipo: "Literal", valor: "\n" };
       case "CORCHETE_IZQ":
         return this.literalArreglo();
       case "PARENTESIS_IZQ": {

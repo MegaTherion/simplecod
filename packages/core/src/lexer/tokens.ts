@@ -20,6 +20,7 @@ export type TipoToken =
   | "Dimension"
   | "Verdadero"
   | "Falso"
+  | "FinL"
   // Operadores lógicos y aritmético de palabra
   | "Y"
   | "O"
@@ -82,6 +83,7 @@ export const PALABRAS_RESERVADAS: Record<string, TipoToken> = {
   Dimension: "Dimension",
   Verdadero: "Verdadero",
   Falso: "Falso",
+  finl: "FinL",
   y: "Y",
   o: "O",
   no: "NO",

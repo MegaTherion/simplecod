@@ -19,7 +19,12 @@ Para            Hasta         FinPara
 Funcion         FinFuncion    Retornar
 Dimension
 Verdadero       Falso
+finl
 ```
+
+`finl` (Hito 4): literal de salto de línea, análogo a `endl` en C++. Ver
+§6 y §9 — `Escribir` no agrega salto de línea automático; para eso se
+escribe `Escribir ..., finl`.
 
 ### 1.2 Operadores y símbolos
 
@@ -158,6 +163,7 @@ primario        = NUMERO
                 | CADENA
                 | "Verdadero"
                 | "Falso"
+                | "finl"
                 | literalArreglo
                 | "(" , expresion , ")"
                 | IDENTIFICADOR , sufijo? ;
@@ -331,6 +337,9 @@ interface Identificador extends Posicion {
 
 ## 5. Ejemplos base
 
+Actualizados en el Hito 4: `Escribir` ya no agrega salto de línea automático
+(ver §6), así que los saltos de línea explícitos se escriben con `finl`.
+
 ### 5.1 Patrón de asteriscos (el caso de tu captura, ya formalizado)
 
 ```
@@ -345,7 +354,7 @@ Inicio
                 Escribir "#"
             FinSi
         FinPara
-        Escribir ""
+        Escribir finl
     FinPara
 Fin
 ```
@@ -368,9 +377,9 @@ Inicio
 
     Leer n
     Si esPrimo(n) Entonces
-        Escribir n, " es primo"
+        Escribir n, " es primo", finl
     Sino
-        Escribir n, " no es primo"
+        Escribir n, " no es primo", finl
     FinSi
 Fin
 ```
@@ -386,7 +395,7 @@ Inicio
         suma = suma + notas[i]
     FinPara
     promedio = suma / 5
-    Escribir "Promedio: ", promedio
+    Escribir "Promedio: ", promedio, finl
 Fin
 ```
 
@@ -396,7 +405,7 @@ Fin
 Inicio
     dias = ["Lun", "Mar", "Mie", "Jue", "Vie"]
     Para i = 0 Hasta 4 Hacer
-        Escribir dias[i]
+        Escribir dias[i], finl
     FinPara
 Fin
 ```
@@ -408,8 +417,9 @@ Fin
 - **Tipado dinámico:** las variables no se declaran con tipo. El valor se infiere en tiempo de ejecución (número, cadena, booleano o arreglo). Leer un valor numérico produce un número; una cadena entre comillas produce una cadena.
 - **`Dimension`** reserva un arreglo del tamaño indicado, inicializado en cero. Soporta múltiples dimensiones (`Dimension m[3][3]` para una matriz).
 - **Índices base 0.** Un acceso fuera de rango es un error de ejecución con posición (ver §7).
-- Los arreglos son valores de primera clase: se pueden asignar (`a = b` copia la referencia; decidir en implementación si copia profunda o referencia — recomendado **copia por valor** para evitar sorpresas pedagógicas), y pasar como argumento a funciones.
+- Los arreglos son valores de primera clase: se pueden asignar y pasar como argumento a funciones. **Decisión (Hito 4): copia por valor** — `a = b` copia el contenido del arreglo, no la referencia. Simplifica el modelo mental para quien está aprendiendo (evita que modificar `b` cambie `a` por sorpresa).
 - `Leer` solo acepta identificadores o accesos a arreglo como destino (`Leer notas[i]` es válido; `Leer 3` no).
+- **`Escribir` NO agrega salto de línea automático** (decisión, Hito 4). Para saltar de línea se usa el literal reservado `finl`, análogo a `endl` en C++: `Escribir "hola", finl`. Ver §5 — los ejemplos base se actualizaron para reflejar esto (sin esta corrección, el patrón de asteriscos de 5.1 imprimiría cada símbolo en su propia línea en vez de formar el triángulo).
 
 ---
 
@@ -463,7 +473,7 @@ Para la demo visual (el grid de variables), los errores se resaltan sobre la lí
 
 ## 9. Pendientes menores para implementación (no bloqueantes)
 
-- [ ] Copia de arreglos: confirmar semántica por valor vs referencia al asignar/pasar como argumento (recomendado: por valor).
-- [ ] `Escribir`: definir si agrega salto de línea automático o no (la versión original parecía manejarlo explícito con `Escribir ""`).
-- [ ] Funciones sin `Retornar`: ¿devuelven un valor "vacío" implícito o es error usar su resultado en una expresión?
-- [ ] Alcance de variables: ¿las funciones ven variables globales o solo sus parámetros? (recomendado: solo parámetros + locales, para claridad).
+- [x] Copia de arreglos: **por valor** (decisión, Hito 4). `a = b` y el paso como argumento copian el contenido, no la referencia. Motivo: simplicidad de comprensión para quien está aprendiendo.
+- [x] `Escribir`: **no agrega salto de línea automático** (decisión, Hito 4). Se usa el literal reservado `finl` (análogo a `endl` de C++) para saltar de línea explícitamente. Ver §1.1, §2 y §6.
+- [x] Funciones sin `Retornar`: **devuelven `Falso` implícitamente** (decisión, Hito 4), sin error. Se eligió `Falso` en vez de introducir un quinto tipo "nulo/vacío" en el sistema de tipos (§6 solo define número, cadena, booleano y arreglo), lo que habría complicado el intérprete y los 3 generadores de código del Hito 5. Usar el resultado en una expresión no falla — se comporta como cualquier booleano.
+- [x] Alcance de variables: **solo parámetros + locales** (decisión tomada en el prompt inicial del proyecto, Hito 4). Las funciones no ven variables globales.

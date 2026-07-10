@@ -156,7 +156,7 @@ describe("ejemplos de docs/gramatica.md §5", () => {
                 Escribir "#"
             FinSi
         FinPara
-        Escribir ""
+        Escribir finl
     FinPara
 Fin`;
 
@@ -196,7 +196,7 @@ Fin`;
       { tipo: "FinSi", lexema: "FinSi" },
       { tipo: "FinPara", lexema: "FinPara" },
       { tipo: "Escribir", lexema: "Escribir" },
-      { tipo: "CADENA", lexema: "" },
+      { tipo: "FinL", lexema: "finl" },
       { tipo: "FinPara", lexema: "FinPara" },
       { tipo: "Fin", lexema: "Fin" },
       { tipo: "EOF", lexema: "" },
@@ -221,9 +221,9 @@ Fin`;
 
     Leer n
     Si esPrimo(n) Entonces
-        Escribir n, " es primo"
+        Escribir n, " es primo", finl
     Sino
-        Escribir n, " no es primo"
+        Escribir n, " no es primo", finl
     FinSi
 Fin`;
 
@@ -277,11 +277,15 @@ Fin`;
       { tipo: "IDENTIFICADOR", lexema: "n" },
       { tipo: "COMA", lexema: "," },
       { tipo: "CADENA", lexema: " es primo" },
+      { tipo: "COMA", lexema: "," },
+      { tipo: "FinL", lexema: "finl" },
       { tipo: "Sino", lexema: "Sino" },
       { tipo: "Escribir", lexema: "Escribir" },
       { tipo: "IDENTIFICADOR", lexema: "n" },
       { tipo: "COMA", lexema: "," },
       { tipo: "CADENA", lexema: " no es primo" },
+      { tipo: "COMA", lexema: "," },
+      { tipo: "FinL", lexema: "finl" },
       { tipo: "FinSi", lexema: "FinSi" },
       { tipo: "Fin", lexema: "Fin" },
       { tipo: "EOF", lexema: "" },
@@ -299,7 +303,7 @@ Fin`;
         suma = suma + notas[i]
     FinPara
     promedio = suma / 5
-    Escribir "Promedio: ", promedio
+    Escribir "Promedio: ", promedio, finl
 Fin`;
 
     const esperado: Array<{ tipo: TipoToken; lexema: string }> = [
@@ -342,6 +346,8 @@ Fin`;
       { tipo: "CADENA", lexema: "Promedio: " },
       { tipo: "COMA", lexema: "," },
       { tipo: "IDENTIFICADOR", lexema: "promedio" },
+      { tipo: "COMA", lexema: "," },
+      { tipo: "FinL", lexema: "finl" },
       { tipo: "Fin", lexema: "Fin" },
       { tipo: "EOF", lexema: "" },
     ];
@@ -353,7 +359,7 @@ Fin`;
     const programa = `Inicio
     dias = ["Lun", "Mar", "Mie", "Jue", "Vie"]
     Para i = 0 Hasta 4 Hacer
-        Escribir dias[i]
+        Escribir dias[i], finl
     FinPara
 Fin`;
 
@@ -384,6 +390,8 @@ Fin`;
       { tipo: "CORCHETE_IZQ", lexema: "[" },
       { tipo: "IDENTIFICADOR", lexema: "i" },
       { tipo: "CORCHETE_DER", lexema: "]" },
+      { tipo: "COMA", lexema: "," },
+      { tipo: "FinL", lexema: "finl" },
       { tipo: "FinPara", lexema: "FinPara" },
       { tipo: "Fin", lexema: "Fin" },
       { tipo: "EOF", lexema: "" },
