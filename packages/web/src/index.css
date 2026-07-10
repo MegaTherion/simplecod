@@ -1,5 +1,9 @@
 :root {
-  color-scheme: light dark;
+  /* La app todavía no tiene un tema oscuro propio (ni resaltado de sintaxis
+     para SimpleCod en el editor); "light dark" hacía que el navegador
+     aplicara texto claro por defecto en modo oscuro del sistema, cayendo
+     sobre el fondo blanco fijo del editor -> texto invisible. */
+  color-scheme: light;
   font-family:
     system-ui,
     -apple-system,

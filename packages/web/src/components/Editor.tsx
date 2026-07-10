@@ -37,6 +37,7 @@ export function Editor({
       height={altura}
       editable={!soloLectura}
       onChange={onChange}
+      theme="light"
       extensions={extensiones}
       onCreateEditor={(vista) => {
         vistaRef.current = vista;
