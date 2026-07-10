@@ -1,0 +1,20 @@
+Inicio
+    Funcion esPrimo(num)
+        Si num < 2 Entonces
+            Retornar Falso
+        FinSi
+        Para i = 2 Hasta num - 1 Hacer
+            Si num mod i == 0 Entonces
+                Retornar Falso
+            FinSi
+        FinPara
+        Retornar Verdadero
+    FinFuncion
+
+    Leer n
+    Si esPrimo(n) Entonces
+        Escribir n, " es primo", finl
+    Sino
+        Escribir n, " no es primo", finl
+    FinSi
+Fin

@@ -1,0 +1,6 @@
+Inicio
+    dias = ["Lun", "Mar", "Mie", "Jue", "Vie"]
+    Para i = 0 Hasta 4 Hacer
+        Escribir dias[i], finl
+    FinPara
+Fin

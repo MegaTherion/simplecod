@@ -1,0 +1,10 @@
+Inicio
+    Dimension notas[5]
+    suma = 0
+    Para i = 0 Hasta 4 Hacer
+        Leer notas[i]
+        suma = suma + notas[i]
+    FinPara
+    promedio = suma / 5
+    Escribir "Promedio: ", promedio, finl
+Fin
