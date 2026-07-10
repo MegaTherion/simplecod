@@ -1,6 +1,6 @@
 # SimpleCod — Especificación de gramática
 
-Documento base antes de implementación. Define léxico, gramática formal (EBNF), precedencia de operadores, manejo de errores y mapeo a nodos de AST. Basado en la sintaxis original de SimpleCod (2010-2011) con extensiones necesarias: funciones y arreglos (ninguno llegó a implementarse en la versión original).
+Documento base antes de implementación. Define léxico, gramática formal (EBNF), precedencia de operadores, manejo de errores y mapeo a nodos de AST. Basado en la sintaxis original de SimpleCod (2005-2006) con extensiones necesarias: funciones y arreglos (ninguno llegó a implementarse en la versión original).
 
 **Decisiones de diseño (ver §8 para el detalle):** tipado dinámico con inferencia, arreglos soportados, sin funciones anidadas, errores con línea y columna.
 

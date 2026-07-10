@@ -9,12 +9,12 @@ paso y transpilación del mismo código a JavaScript, Python y Pascal.
 
 ## Historia
 
-SimpleCod nació en 2010-2011 como un intérprete de escritorio escrito en
+SimpleCod nació en 2005-2006 como un intérprete de escritorio escrito en
 Borland C++ Builder 6, para ayudar a estudiantes a visualizar cómo corre un
 pseudocódigo línea por línea. Aquella versión nunca llegó a tener funciones ni
 arreglos — se quedó en el prototipo.
 
-Esta es la reconstrucción moderna, 15 años después: mismo espíritu pedagógico
+Esta es la reconstrucción moderna, 20 años después: mismo espíritu pedagógico
 (pseudocódigo en español, ver las variables cambiar paso a paso), pero ahora
 corriendo enteramente en el navegador, con un lexer, parser y AST propios
 escritos a mano, funciones y arreglos que la versión original no tuvo, y
