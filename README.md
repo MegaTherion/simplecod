@@ -17,7 +17,7 @@ arreglos — se quedó en el prototipo.
 Esta es la reconstrucción moderna, 20 años después: mismo espíritu pedagógico
 (pseudocódigo en español, ver las variables cambiar paso a paso), pero ahora
 corriendo enteramente en el navegador, con un lexer, parser y AST propios
-escritos a mano, funciones y arreglos que la versión original no tuvo, y
+escritos a mano y en algunos bloques de código con asistente IA, funciones y arreglos que la versión original no tuvo, y
 transpilación a tres lenguajes reales.
 
 ## Qué hace
