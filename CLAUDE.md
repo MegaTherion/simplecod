@@ -1,6 +1,7 @@
 # SimpleCod
 
 ## Qué es
+
 Intérprete web de pseudocódigo en español, con debugger visual que muestra las
 variables cambiando paso a paso, y transpilación del mismo AST a JS, Python y
 Pascal. Reconstrucción moderna de un proyecto de 2010 (originalmente en Borland
@@ -8,6 +9,7 @@ C++ Builder 6). Objetivo: pieza de portafolio que demuestra fundamentos de
 compiladores (lexer, parser, AST, interpretación, generación de código).
 
 ## Stack
+
 - TypeScript (estricto) para todo el core, sin dependencias de parsing externas
   (el lexer y parser se escriben a mano, es parte del valor del proyecto)
 - React 18 + Vite para la UI web
@@ -18,18 +20,21 @@ compiladores (lexer, parser, AST, interpretación, generación de código).
 - Deploy estático: GitHub Pages o Vercel (sin backend, todo corre en el browser)
 
 ## Comandos
+
 - Desarrollo: `npm run dev` (levanta la app web con Vite)
 - Tests: `npm run test` (Vitest, corre sobre packages/core)
 - Build: `npm run build`
 - Lint/format: `npm run lint` / `npm run format`
 
 ## Estructura
+
 - `packages/core/` — lexer, parser, AST, intérprete, codegen (TypeScript puro, testeable en aislamiento, cero imports de React)
 - `packages/web/` — app React (editor, grid de variables, panel de salida)
 - `docs/` — `gramatica.md` es la especificación normativa del lenguaje
 - `examples/` — programas `.scc` de ejemplo
 
 ## Convenciones
+
 - Todo el código, tipos y comentarios en español (nombres de nodos AST tal cual
   el documento: `BuclePara`, `Condicional`, `AccesoArreglo`, etc.)
 - La UI está en español (es el idioma del lenguaje que interpreta)
@@ -40,6 +45,7 @@ compiladores (lexer, parser, AST, interpretación, generación de código).
 - Los tokens llevan `{ tipo, lexema, linea, columna }` desde el lexer
 
 ## Reglas duras
+
 - `packages/core` NO importa nada de React ni del DOM — debe poder correr en Node
   puro y testearse sin navegador
 - No usar librerías de parser generators (nada de PEG.js, nearley, ANTLR): el
@@ -49,4 +55,5 @@ compiladores (lexer, parser, AST, interpretación, generación de código).
 - No commitear `node_modules` ni artefactos de build
 
 ## Referencias
+
 - Especificación completa del lenguaje: `docs/gramatica.md`

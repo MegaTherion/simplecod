@@ -23,15 +23,15 @@ Verdadero       Falso
 
 ### 1.2 Operadores y símbolos
 
-| Categoría      | Símbolos                          |
-|----------------|------------------------------------|
-| Aritméticos    | `+` `-` `*` `/` `mod` `^`         |
-| Relacionales   | `==` `!=` `<` `>` `<=` `>=`       |
-| Lógicos        | `y` `o` `no`                      |
-| Asignación     | `=`                                 |
-| Agrupación     | `(` `)`                            |
-| Indexación     | `[` `]`                            |
-| Separadores    | `,`                                 |
+| Categoría    | Símbolos                    |
+| ------------ | --------------------------- |
+| Aritméticos  | `+` `-` `*` `/` `mod` `^`   |
+| Relacionales | `==` `!=` `<` `>` `<=` `>=` |
+| Lógicos      | `y` `o` `no`                |
+| Asignación   | `=`                         |
+| Agrupación   | `(` `)`                     |
+| Indexación   | `[` `]`                     |
+| Separadores  | `,`                         |
 
 ### 1.3 Literales
 
@@ -55,8 +55,8 @@ Cada token producido por el lexer lleva su posición de origen:
 interface Token {
   tipo: TipoToken;
   lexema: string;
-  linea: number;    // 1-indexado
-  columna: number;  // 1-indexado, columna del primer carácter del lexema
+  linea: number; // 1-indexado
+  columna: number; // 1-indexado, columna del primer carácter del lexema
 }
 ```
 
@@ -176,16 +176,16 @@ listaArgumentos = expresion , ("," , expresion)* ;
 
 ## 3. Precedencia de operadores (de menor a mayor)
 
-| Nivel | Operadores        | Asociatividad             |
-|-------|--------------------|----------------------------|
-| 1     | `o`                | izquierda                  |
-| 2     | `y`                | izquierda                  |
-| 3     | `no`               | derecha (unario)           |
-| 4     | `==` `!=` `<` `>` `<=` `>=` | no asociativo     |
-| 5     | `+` `-`            | izquierda                  |
-| 6     | `*` `/` `mod`      | izquierda                  |
-| 7     | `-` (unario)       | derecha                    |
-| 8     | `^`                | derecha                    |
+| Nivel | Operadores                  | Asociatividad    |
+| ----- | --------------------------- | ---------------- |
+| 1     | `o`                         | izquierda        |
+| 2     | `y`                         | izquierda        |
+| 3     | `no`                        | derecha (unario) |
+| 4     | `==` `!=` `<` `>` `<=` `>=` | no asociativo    |
+| 5     | `+` `-`                     | izquierda        |
+| 6     | `*` `/` `mod`               | izquierda        |
+| 7     | `-` (unario)                | derecha          |
+| 8     | `^`                         | derecha          |
 
 Nota: los relacionales son **no asociativos** a propósito — `a < b < c` no es válido gramaticalmente. Evita la ambigüedad de si significa `(a<b) < c` o el encadenamiento estilo Python. Se fuerza a escribir `a < b y b < c`.
 
@@ -222,18 +222,18 @@ interface Posicion {
 
 interface Programa {
   tipo: "Programa";
-  cuerpo: Nodo[];   // mezcla de DeclaracionFuncion y sentencias
+  cuerpo: Nodo[]; // mezcla de DeclaracionFuncion y sentencias
 }
 
 interface Dimension extends Posicion {
   tipo: "Dimension";
   nombre: string;
-  dimensiones: Nodo[];   // una entrada por cada [expresion]
+  dimensiones: Nodo[]; // una entrada por cada [expresion]
 }
 
 interface Asignacion extends Posicion {
   tipo: "Asignacion";
-  objetivo: Identificador | AccesoArreglo;   // lvalue
+  objetivo: Identificador | AccesoArreglo; // lvalue
   valor: Nodo;
 }
 
@@ -302,7 +302,7 @@ interface ExpresionUnaria extends Posicion {
 interface AccesoArreglo extends Posicion {
   tipo: "AccesoArreglo";
   nombre: string;
-  indices: Nodo[];   // una entrada por cada [expresion]
+  indices: Nodo[]; // una entrada por cada [expresion]
 }
 
 interface LiteralArreglo extends Posicion {
@@ -412,6 +412,7 @@ Fin
 Tres categorías, todas con posición `linea:columna`:
 
 ### 7.1 Errores léxicos
+
 Carácter no reconocido, cadena sin cerrar, número mal formado.
 
 ```
@@ -419,6 +420,7 @@ Error léxico [línea 4, columna 12]: carácter inesperado '@'
 ```
 
 ### 7.2 Errores sintácticos
+
 Token inesperado según la gramática. El mensaje indica qué se esperaba.
 
 ```
@@ -426,6 +428,7 @@ Error sintáctico [línea 7, columna 5]: se esperaba 'Entonces' después de la c
 ```
 
 ### 7.3 Errores semánticos / de ejecución
+
 Variable no definida, función inexistente, índice fuera de rango, número incorrecto de argumentos, división por cero, uso de `Retornar` fuera de una función.
 
 ```
@@ -445,12 +448,12 @@ Para la demo visual (el grid de variables), los errores se resaltan sobre la lí
 
 ## 8. Decisiones tomadas
 
-| Tema | Decisión | Motivo |
-|------|----------|--------|
-| **Arreglos** | Incluidos (`Dimension`, literales, indexación multidimensional) | Suben el nivel técnico del portafolio y habilitan ejercicios clásicos (ordenamiento, matrices) |
-| **Tipado** | Dinámico con inferencia | Simplicidad pedagógica; mantiene el espíritu de la versión original que infería `float` al leer |
-| **Funciones anidadas** | No permitidas | Se fuerza por gramática (`sentencia` no incluye `declaracionFuncion`); simplifica el manejo de scopes |
-| **Errores** | Con línea y columna, en 3 categorías | Estilo compilador moderno; se ve muy bien en la demo y en el README |
+| Tema                   | Decisión                                                        | Motivo                                                                                                |
+| ---------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Arreglos**           | Incluidos (`Dimension`, literales, indexación multidimensional) | Suben el nivel técnico del portafolio y habilitan ejercicios clásicos (ordenamiento, matrices)        |
+| **Tipado**             | Dinámico con inferencia                                         | Simplicidad pedagógica; mantiene el espíritu de la versión original que infería `float` al leer       |
+| **Funciones anidadas** | No permitidas                                                   | Se fuerza por gramática (`sentencia` no incluye `declaracionFuncion`); simplifica el manejo de scopes |
+| **Errores**            | Con línea y columna, en 3 categorías                            | Estilo compilador moderno; se ve muy bien en la demo y en el README                                   |
 
 ## 9. Pendientes menores para implementación (no bloqueantes)
 

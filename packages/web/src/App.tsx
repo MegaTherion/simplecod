@@ -18,12 +18,7 @@ export function App() {
           Ejecutar
         </button>
       </header>
-      <CodeMirror
-        value={codigo}
-        height="70vh"
-        onChange={setCodigo}
-        className="app__editor"
-      />
+      <CodeMirror value={codigo} height="70vh" onChange={setCodigo} className="app__editor" />
     </main>
   );
 }

@@ -1,3 +1,3 @@
-// Analizador léxico, ver docs/gramatica.md §1.
-// Se completa en el Hito 2.
-export {};
+export { Lexer } from "./lexer.js";
+export { PALABRAS_RESERVADAS } from "./tokens.js";
+export type { Token, TipoToken } from "./tokens.js";
