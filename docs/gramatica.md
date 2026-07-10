@@ -96,7 +96,11 @@ objetivo        = IDENTIFICADOR , ("[" , expresion , "]")* ;
 
 (* --- Entrada / salida --- *)
 
-lectura         = "Leer" , IDENTIFICADOR , ("," , IDENTIFICADOR)* ;
+(* Nota de corrección (Hito 3): la regla original solo admitía            *)
+(* IDENTIFICADOR suelto, lo cual contradecía §6 ("Leer notas[i] es        *)
+(* válido") y el propio ejemplo 5.3. Se reutiliza 'objetivo' para         *)
+(* permitir accesos a arreglo como destino de lectura.                    *)
+lectura         = "Leer" , objetivo , ("," , objetivo)* ;
 
 escritura       = "Escribir" , expresion , ("," , expresion)* ;
 
@@ -239,7 +243,9 @@ interface Asignacion extends Posicion {
 
 interface Lectura extends Posicion {
   tipo: "Lectura";
-  variables: string[];
+  // Corrección Hito 3: antes era `variables: string[]`, pero eso no permitía
+  // `Leer notas[i]` (válido según §6 y usado en el ejemplo 5.3).
+  objetivos: (Identificador | AccesoArreglo)[];
 }
 
 interface Escritura extends Posicion {

@@ -1,7 +1,4 @@
-export interface Posicion {
-  linea: number;
-  columna: number;
-}
+import type { Posicion } from "../ast/index.js";
 
 export abstract class ErrorSimpleCod extends Error {
   readonly linea: number;
@@ -18,5 +15,12 @@ export class ErrorLexico extends ErrorSimpleCod {
   constructor(mensaje: string, posicion: Posicion) {
     super("léxico", mensaje, posicion);
     this.name = "ErrorLexico";
+  }
+}
+
+export class ErrorSintactico extends ErrorSimpleCod {
+  constructor(mensaje: string, posicion: Posicion) {
+    super("sintáctico", mensaje, posicion);
+    this.name = "ErrorSintactico";
   }
 }
