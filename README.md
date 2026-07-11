@@ -3,7 +3,7 @@
 **Intérprete web de pseudocódigo en español**, con debugger visual paso a
 paso y transpilación del mismo código a JavaScript, Python y Pascal.
 
-🔗 **[Probalo en vivo](https://megatherion.github.io/simplecod/)**
+🔗 **[Pruébalo en vivo](https://megatherion.github.io/simplecod/)**
 
 ![Debugger de SimpleCod ejecutando el patrón de asteriscos paso a paso](docs/demo.gif)
 
